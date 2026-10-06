@@ -83,7 +83,7 @@ const sample = {
   vote_count: 9692,
 };
 
-const movies = [sample, sample, sample, sample, sample, sample, sample];
+const movies = Array.from({ length: 7 }, (_, i) => ({ ...sample, id: sample.id + i }));
 
 const App = () => {
   return (
