@@ -24,6 +24,12 @@ const HomePage = (props) => {
     else setGenreFilter(value);
   };
 
+  const addToFavorites = (movieId) => {
+    const updatedMovies = movies.map((m) =>
+      m.id === movieId ? { ...m, favorite: true } : m
+    );
+    setMovies(updatedMovies);
+  };
 
 
   useEffect(() => {
@@ -54,7 +60,7 @@ const HomePage = (props) => {
           />
 
         </Grid>
-        <MovieList movies={displayedMovies} />
+        <MovieList movies={displayedMovies} selectFavorite={addToFavorites} />
 
       </Grid>
     </Grid>
