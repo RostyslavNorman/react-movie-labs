@@ -22,7 +22,6 @@ const HomePage = (props) => {
   
   const movies = data.results;
 
-  // Redundant, but necessary to avoid app crashing.
      return (
       <PageTemplate
         title="Discover Movies"

@@ -12,6 +12,7 @@ import MovieReviews from "../movieReviews"
 import MovieCast from "../movieCast";
 import RelatedMovies from "../relatedMovies";
 import { getMovieRecommendations, getSimilarMovies } from "../../api/tmdb-api";
+import MovieTrailer from "../movieTrailer";
 
 const root = {
   display: "flex",
