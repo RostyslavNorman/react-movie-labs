@@ -137,9 +137,24 @@ export const getNowPlayingMovies = ({ queryKey }) => {
   return tmdbFetch("/movie/now_playing", { page });
 };
 
-// stretch: 
+
 export const getTrendingMovies = ({ queryKey }) => {
   const [, { page }] = queryKey;
   return tmdbFetch("/trending/movie/week", { page });
+};
+
+export const getMovieCredits = ({ queryKey }) => {
+  const [, { id }] = queryKey;
+  return tmdbFetch(`/movie/${id}/credits`);
+};
+
+export const getPerson = ({ queryKey }) => {
+  const [, { id }] = queryKey;
+  return tmdbFetch(`/person/${id}`);
+};
+
+export const getPersonMovieCredits = ({ queryKey }) => {
+  const [, { id }] = queryKey;
+  return tmdbFetch(`/person/${id}/movie_credits`);
 };
 
