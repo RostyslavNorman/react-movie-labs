@@ -1,3 +1,23 @@
+const BASE_URL = "https://api.themoviedb.org/3";
+
+const tmdbFetch = (path, params = {}) => {
+  const query = new URLSearchParams({
+    api_key: import.meta.env.VITE_TMDB_KEY,
+    language: "en-US",
+    ...params,
+  });
+  return fetch(`${BASE_URL}${path}?${query}`).then((response) => {
+    if (!response.ok) {
+      return response.json().then((error) => {
+        throw new Error(error.status_message || "Something went wrong");
+      });
+    }
+    return response.json();
+  });
+};
+
+
+
 export const getMovies = () => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
@@ -100,5 +120,26 @@ export const getUpcomingMovies = () => {
     }
     return response.json();
   });
+};
+
+export const getPopularMovies = ({ queryKey }) => {
+  const [, { page }] = queryKey;
+  return tmdbFetch("/movie/popular", { page });
+};
+
+export const getTopRatedMovies = ({ queryKey }) => {
+  const [, { page }] = queryKey;
+  return tmdbFetch("/movie/top_rated", { page });
+};
+
+export const getNowPlayingMovies = ({ queryKey }) => {
+  const [, { page }] = queryKey;
+  return tmdbFetch("/movie/now_playing", { page });
+};
+
+// stretch: 
+export const getTrendingMovies = ({ queryKey }) => {
+  const [, { page }] = queryKey;
+  return tmdbFetch("/trending/movie/week", { page });
 };
 
