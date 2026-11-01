@@ -10,6 +10,8 @@ import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews"
 import MovieCast from "../movieCast";
+import RelatedMovies from "../relatedMovies";
+import { getMovieRecommendations, getSimilarMovies } from "../../api/tmdb-api";
 
 const root = {
   display: "flex",
@@ -39,7 +41,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         component="ul"
         sx={{ ...root }}
       >
-        
+
         <li>
           <Chip label="Genres" sx={{ ...chip }} color="primary" />
         </li>
@@ -72,6 +74,8 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
         ))}
       </Paper>
       <MovieCast movie={movie} />
+      <RelatedMovies movie={movie} title="Recommended" queryName="recommendations" queryFn={getMovieRecommendations} />
+      <RelatedMovies movie={movie} title="Similar movies" queryName="similar" queryFn={getSimilarMovies} />
       <Fab
         color="secondary"
         variant="extended"
