@@ -15,7 +15,7 @@ import { Link } from "react-router";
 import Avatar from '@mui/material/Avatar';
 import { useContext } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
-
+import CardActionArea from "@mui/material/CardActionArea";
 
 
 export default function MovieCard({ movie, action }) {
@@ -50,14 +50,16 @@ export default function MovieCard({ movie, action }) {
         }
       />
 
-      <CardMedia
-        sx={{ height: 500 }}
-        image={
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-            : img
-        }
-      />
+      <CardActionArea component={Link} to={`/movies/${movie.id}`} aria-label={`Open ${movie.title}`}>
+        <CardMedia
+          sx={{ height: 500 }}
+          image={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+              : img
+          }
+        />
+      </CardActionArea>
       <CardContent>
         <Grid container>
           <Grid size={{ xs: 6 }}>
