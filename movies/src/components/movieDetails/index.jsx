@@ -76,6 +76,7 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
       <MovieCast movie={movie} />
       <RelatedMovies movie={movie} title="Recommended" queryName="recommendations" queryFn={getMovieRecommendations} />
       <RelatedMovies movie={movie} title="Similar movies" queryName="similar" queryFn={getSimilarMovies} />
+      <MovieTrailer movie={movie} />
       <Fab
         color="secondary"
         variant="extended"
