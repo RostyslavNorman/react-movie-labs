@@ -158,3 +158,17 @@ export const getPersonMovieCredits = ({ queryKey }) => {
   return tmdbFetch(`/person/${id}/movie_credits`);
 };
 
+export const getMovieRecommendations = ({ queryKey }) => {
+  const [, { id }] = queryKey;
+  return tmdbFetch(`/movie/${id}/recommendations`);
+};
+
+export const getSimilarMovies = ({ queryKey }) => {
+  const [, { id }] = queryKey;
+  return tmdbFetch(`/movie/${id}/similar`);
+};
+
+export const getMovieVideos = ({ queryKey }) => {
+  const [, { id }] = queryKey;
+  return tmdbFetch(`/movie/${id}/videos`);
+};
