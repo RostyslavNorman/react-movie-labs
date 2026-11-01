@@ -12,7 +12,7 @@ import MovieReviews from "../movieReviews"
 import MovieCast from "../movieCast";
 import RelatedMovies from "../relatedMovies";
 import { getMovieRecommendations, getSimilarMovies } from "../../api/tmdb-api";
-import MovieTrailer from "../movieTrailer";
+
 
 const root = {
   display: "flex",
@@ -77,7 +77,6 @@ const MovieDetails = ({ movie }) => {  // Don't miss this!
       <MovieCast movie={movie} />
       <RelatedMovies movie={movie} title="Recommended" queryName="recommendations" queryFn={getMovieRecommendations} />
       <RelatedMovies movie={movie} title="Similar movies" queryName="similar" queryFn={getSimilarMovies} />
-      <MovieTrailer movie={movie} />
       <Fab
         color="secondary"
         variant="extended"

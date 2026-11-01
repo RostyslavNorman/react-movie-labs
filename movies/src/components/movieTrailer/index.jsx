@@ -17,7 +17,7 @@ export default function MovieTrailer({ movie }) {
 
   return (
     <>
-      <Button variant="contained" startIcon={<PlayArrowIcon />} onClick={() => setOpen(true)} sx={{ my: 2 }}>
+      <Button variant="contained" startIcon={<PlayArrowIcon />} onClick={() => setOpen(true)} fullWidth sx={{ my: 2 }}>
         Watch trailer
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
