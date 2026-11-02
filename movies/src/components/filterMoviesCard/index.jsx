@@ -13,7 +13,7 @@ import React, { useState, useEffect } from "react";
 import { getGenres } from "../../api/tmdb-api";
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../spinner';
-
+import Slider from "@mui/material/Slider";
 
 const formControl =
 {
@@ -37,13 +37,13 @@ export default function FilterMoviesCard(props) {
     return <h1>{error.message}</h1>;
   }
   const genres = data.genres;
-  if (genres[0].name !== "All"){
+  if (genres[0].name !== "All") {
     genres.unshift({ id: "0", name: "All" });
   }
 
   const handleChange = (e, type, value) => {
     e.preventDefault();
-    props.onUserInput(type, value); 
+    props.onUserInput(type, value);
   };
 
   const handleTextChange = (e, props) => {
@@ -53,6 +53,15 @@ export default function FilterMoviesCard(props) {
   const handleGenreChange = (e) => {
     handleChange(e, "genre", e.target.value);
   };
+
+  const languages = [
+    { code: "all", name: "All" },
+    { code: "en", name: "English" },
+    { code: "fr", name: "French" },
+    { code: "es", name: "Spanish" },
+    { code: "ja", name: "Japanese" },
+    { code: "ko", name: "Korean" },
+  ];
 
 
 
@@ -78,23 +87,45 @@ export default function FilterMoviesCard(props) {
           onChange={handleTextChange}
         />
 
-        <FormControl sx={{ ...formControl }}>
-          <InputLabel id="genre-label">Genre</InputLabel>
-          <Select
-            labelId="genre-label"
-            id="genre-select"
-            defaultValue=""
-            value={props.genreFilter}
-            onChange={handleGenreChange}
-          >
+        <Typography sx={{ mt: 2, ml: 1 }}>Minimum rating: {props.ratingFilter}</Typography>
+        <Slider
+          value={props.ratingFilter}
+          onChange={(e, value) => props.onUserInput("rating", value)}
+          min={0}
+          max={10}
+          step={0.5}
+          valueLabelDisplay="auto"
+          sx={{ width: "90%", mx: 1 }}
+        />
 
-            {genres.map((genre) => {
-              return (
-                <MenuItem key={genre.id} value={genre.id}>
-                  {genre.name}
-                </MenuItem>
-              );
-            })}
+        <FormControl sx={{ ...formControl }}>
+          <InputLabel id="language-label">Language</InputLabel>
+          <Select
+            labelId="language-label"
+            label="Language"
+            value={props.languageFilter}
+            onChange={(e) => props.onUserInput("language", e.target.value)}
+          >
+            {languages.map((l) => (
+              <MenuItem key={l.code} value={l.code}>{l.name}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl sx={{ ...formControl }}>
+          <InputLabel id="sort-label">Sort by</InputLabel>
+          <Select
+            labelId="sort-label"
+            label="Sort by"
+            value={props.sortBy}
+            onChange={(e) => props.onUserInput("sort", e.target.value)}
+          >
+            <MenuItem value="none">Default</MenuItem>
+            <MenuItem value="ratingDesc">Rating: high → low</MenuItem>
+            <MenuItem value="ratingAsc">Rating: low → high</MenuItem>
+            <MenuItem value="dateDesc">Newest first</MenuItem>
+            <MenuItem value="dateAsc">Oldest first</MenuItem>
+            <MenuItem value="titleAsc">Title A–Z</MenuItem>
           </Select>
         </FormControl>
       </CardContent>

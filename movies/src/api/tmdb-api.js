@@ -172,3 +172,8 @@ export const getMovieVideos = ({ queryKey }) => {
   const [, { id }] = queryKey;
   return tmdbFetch(`/movie/${id}/videos`);
 };
+
+export const searchMovies = ({ queryKey }) => {
+  const [, { query, page }] = queryKey;
+  return tmdbFetch("/search/movie", { query, page, include_adult: false });
+};
