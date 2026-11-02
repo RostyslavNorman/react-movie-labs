@@ -18,6 +18,7 @@ import PersonDetailsPage from "./pages/personDetailsPage";
 import ScrollToTop from "./components/scrollToTop";
 import MustWatchMoviesPage from "./pages/mustWatchMoviesPage";
 import FavoriteActorsPage from "./pages/favoriteActorsPage";
+import SearchMoviesPage from "./pages/searchMoviesPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -51,6 +52,7 @@ const App = () => {
             <Route path="/movies/must-watch" element={<MustWatchMoviesPage />} />
             <Route path="/actors/favorites" element={<FavoriteActorsPage />} />
             <Route path="/person/:id" element={<PersonDetailsPage />} />
+            <Route path="/search" element={<SearchMoviesPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
