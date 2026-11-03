@@ -48,7 +48,7 @@ const SearchMoviesPage = () => {
         <>
           <Typography sx={{ px: 3 }}>{data.total_results} results for “{query}”</Typography>
           <Grid container>
-            <MovieList movies={data.results} action={(m) => <DefaultActions movie={movie}/>} />
+              <MovieList movies={data.results} action={(m) => <DefaultActions movie={m} />} />
           </Grid>
         </>
       )}

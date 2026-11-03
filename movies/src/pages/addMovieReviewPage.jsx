@@ -7,12 +7,15 @@ import Spinner from "../components/spinner";
 
 const WriteReviewPage = (props) => {
   const location = useLocation();
-  const movieId = location.state.movieId;
+    const movieId = location.state?.movieId;
 
   const { data: movie, error, isLoading, isError } = useQuery({
     queryKey: ['movie', {id: movieId}],
     queryFn: getMovie,
+    enabled: Boolean(movieId),
   });
+
+  if (!movieId) return <Navigate to="/" replace />;
 
   if (isLoading) {
     return <Spinner />;
