@@ -79,10 +79,6 @@ const SiteHeader = () => {
             >
               <MenuIcon />
             </IconButton>
-            <IconButton color="inherit" onClick={toggle} aria-label="toggle dark mode">
-              {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
-
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
