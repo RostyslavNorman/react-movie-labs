@@ -6,17 +6,24 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 
 const AddToMustWatchIcon = ({ movie }) => {
-  const { mustWatch, addToMustWatch } = useContext(MoviesContext);
+  const { mustWatch, addToMustWatch, removeFromMustWatch } = useContext(MoviesContext);
   const inList = mustWatch.includes(movie.id);
 
-  const handleAddToMustWatch = (e) => {
+  const handleToggle = (e) => {
     e.preventDefault();
-    addToMustWatch(movie);
+    if (inList) {
+      removeFromMustWatch(movie);
+    } else {
+      addToMustWatch(movie);
+    }
   };
 
   return (
-    <Tooltip title={inList ? "In Must Watch" : "Add to Must Watch"}>
-      <IconButton aria-label="add to must watch" onClick={handleAddToMustWatch}>
+    <Tooltip title={inList ? "Remove from Must Watch" : "Add to Must Watch"}>
+      <IconButton
+        aria-label={inList ? "remove from must watch" : "add to must watch"}
+        onClick={handleToggle}
+      >
         {inList ? (
           <PlaylistAddCheckIcon color="success" fontSize="large" />
         ) : (
