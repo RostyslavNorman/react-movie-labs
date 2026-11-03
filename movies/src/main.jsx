@@ -19,6 +19,12 @@ import ScrollToTop from "./components/scrollToTop";
 import MustWatchMoviesPage from "./pages/mustWatchMoviesPage";
 import FavoriteActorsPage from "./pages/favoriteActorsPage";
 import SearchMoviesPage from "./pages/searchMoviesPage";
+import { useMemo } from "react";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { getTheme } from "./theme";
+import { ColorModeContext } from "./contexts/colorModeContext";
+import usePersistentState from "./hooks/usePersistentState";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,37 +36,45 @@ const queryClient = new QueryClient({
   },
 });
 
-
-
 const App = () => {
+  const [mode, setMode] = usePersistentState("tmdb.colorMode", "dark");
+  const theme = useMemo(() => getTheme(mode), [mode]);
+  const colorMode = useMemo(
+    () => ({ mode, toggle: () => setMode((m) => (m === "light" ? "dark" : "light")) }),
+    [mode, setMode]
+  );
+
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <ScrollToTop />
-        <SiteHeader />
-        <MoviesContextProvider>
-          <Routes>
-
-            <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-            <Route path="/reviews/:id" element={<MovieReviewPage />} />
-            <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
-            <Route path="/reviews/form" element={<AddMovieReviewPage />} />
-            <Route path="/movies/:id" element={<MoviePage />} />
-            <Route path="/movies/popular" element={<PopularMoviesPage />} />
-            <Route path="/movies/top-rated" element={<TopRatedMoviesPage />} />
-            <Route path="/movies/now-playing" element={<NowPlayingMoviesPage />} />
-            <Route path="/movies/must-watch" element={<MustWatchMoviesPage />} />
-            <Route path="/actors/favorites" element={<FavoriteActorsPage />} />
-            <Route path="/person/:id" element={<PersonDetailsPage />} />
-            <Route path="/search" element={<SearchMoviesPage />} />
-            <Route path="/" element={<HomePage />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </MoviesContextProvider>
-      </BrowserRouter>
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <BrowserRouter>
+            <ScrollToTop />
+            <SiteHeader />
+            <MoviesContextProvider>
+              <Routes>
+                <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
+                <Route path="/reviews/:id" element={<MovieReviewPage />} />
+                <Route path="/movies/favorites" element={<FavoriteMoviesPage />} />
+                <Route path="/reviews/form" element={<AddMovieReviewPage />} />
+                <Route path="/movies/:id" element={<MoviePage />} />
+                <Route path="/movies/popular" element={<PopularMoviesPage />} />
+                <Route path="/movies/top-rated" element={<TopRatedMoviesPage />} />
+                <Route path="/movies/now-playing" element={<NowPlayingMoviesPage />} />
+                <Route path="/movies/must-watch" element={<MustWatchMoviesPage />} />
+                <Route path="/actors/favorites" element={<FavoriteActorsPage />} />
+                <Route path="/person/:id" element={<PersonDetailsPage />} />
+                <Route path="/search" element={<SearchMoviesPage />} />
+                <Route path="/" element={<HomePage />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </MoviesContextProvider>
+          </BrowserRouter>
+        </ThemeProvider>
+      </ColorModeContext.Provider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
-
   );
 };
 

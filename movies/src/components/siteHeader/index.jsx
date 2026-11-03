@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,6 +11,9 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { ColorModeContext } from "../../contexts/colorModeContext";
 
 const SiteHeader = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -33,6 +36,8 @@ const SiteHeader = () => {
     { label: "Fav Actors", path: "/actors/favorites" },
     { label: "Search", path: "/search" },
   ];
+
+  const { mode, toggle } = useContext(ColorModeContext);
 
   const handleMenuSelect = (pageURL) => {
     setAnchorEl(null);
@@ -74,6 +79,10 @@ const SiteHeader = () => {
             >
               <MenuIcon />
             </IconButton>
+            <IconButton color="inherit" onClick={toggle} aria-label="toggle dark mode">
+              {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
@@ -102,6 +111,9 @@ const SiteHeader = () => {
             </Button>
           ))
         )}
+        <IconButton color="inherit" onClick={toggle} aria-label="toggle dark mode">
+          {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
