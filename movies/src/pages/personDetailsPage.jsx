@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { getPerson, getPersonMovieCredits } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import MovieList from "../components/movieList";
-import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
+import DefaultActions from "../components/cardIcons/defaultActions"
 import img from "../images/film-poster-placeholder.png";
 import { useContext } from "react";
 import Button from "@mui/material/Button";
@@ -64,7 +64,7 @@ const PersonDetailsPage = () => {
         <Typography variant="h4" component="h2">Known for</Typography>
       </Grid>
       <Grid container size={12}>
-        <MovieList movies={movies} action={(movie) => <AddToFavoritesIcon movie={movie} />} />
+        <MovieList movies={movies} action={(movie) => <DefaultActions movie={movie} />} />
       </Grid>
     </Grid>
   );

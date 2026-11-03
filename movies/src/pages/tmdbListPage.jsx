@@ -1,6 +1,6 @@
 import PageTemplate from "../components/templateMovieListPage";
 import Spinner from "../components/spinner";
-import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
+import DefaultActions from "../components/cardIcons/defaultActions"
 import { useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import Pagination from "@mui/material/Pagination";
@@ -22,7 +22,7 @@ const { data, error, isPending, isError } = useQuery({
       <PageTemplate
         title={title}
         movies={data.results}
-        action={(movie) => <AddToFavoritesIcon movie={movie} />}
+        action={(movie) => <DefaultActions movie={movie}/>}
       />
       <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
         <Pagination

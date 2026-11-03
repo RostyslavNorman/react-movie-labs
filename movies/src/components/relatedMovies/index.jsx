@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import MovieList from "../movieList";
 import Spinner from "../spinner";
-import AddToFavoritesIcon from "../cardIcons/addToFavorites";
+import DefaultActions from "../cardIcons/defaultActions"
 
 export default function RelatedMovies({ movie, title, queryName, queryFn }) {
   const { data, error, isPending, isError } = useQuery({
@@ -21,7 +21,7 @@ export default function RelatedMovies({ movie, title, queryName, queryFn }) {
       <Grid container>
         <MovieList
           movies={data.results.slice(0, 6)}
-          action={(m) => <AddToFavoritesIcon movie={m} />}
+          action={(m) => <DefaultActions movie={m} />}
         />
       </Grid>
     </>

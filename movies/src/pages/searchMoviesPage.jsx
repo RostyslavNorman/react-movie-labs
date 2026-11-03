@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Header from "../components/headerMovieList";
 import MovieList from "../components/movieList";
 import Spinner from "../components/spinner";
-import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
+import DefaultActions from "../components/cardIcons/defaultActions"
 import { searchMovies } from "../api/tmdb-api";
 
 const SearchMoviesPage = () => {
@@ -48,7 +48,7 @@ const SearchMoviesPage = () => {
         <>
           <Typography sx={{ px: 3 }}>{data.total_results} results for “{query}”</Typography>
           <Grid container>
-            <MovieList movies={data.results} action={(m) => <AddToFavoritesIcon movie={m} />} />
+            <MovieList movies={data.results} action={(m) => <DefaultActions movie={movie}/>} />
           </Grid>
         </>
       )}
