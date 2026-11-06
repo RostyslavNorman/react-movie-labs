@@ -11,7 +11,7 @@ const TmdbListPage = ({ title, queryName, queryFn }) => {
 const { data, error, isPending, isError } = useQuery({
   queryKey: [queryName, { page }],
   queryFn,
-  placeholderData: keepPreviousData, // старая страница видна, пока грузится новая
+  placeholderData: keepPreviousData,
 });
 
   if (isPending) return <Spinner />;

@@ -20,7 +20,7 @@ const SiteHeader = () => {
   const open = Boolean(anchorEl);
 
   const theme = useTheme();
-  // 9 пунктов меню не влезают в одну строку уже на ~1200px, ниже — бургер
+  
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   const navigate = useNavigate();

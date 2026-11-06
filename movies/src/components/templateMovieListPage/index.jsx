@@ -45,7 +45,6 @@ function MovieListPageTemplate({ movies, title, action }) {
 
   const resetFilters = () => setFilters(defaultFilters);
 
-  // чипы активных фильтров над списком
   const activeChips = [];
   if (filters.name) activeChips.push({ key: "name", label: `“${filters.name}”` });
   if (genreId > 0) {
